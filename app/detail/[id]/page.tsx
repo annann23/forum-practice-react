@@ -3,13 +3,13 @@ import { ObjectId } from "mongodb";
 import Link from "next/link";
 
 interface PageProps {
-  params: { id: ObjectId};
+  params: { id: string };
 }
 
-export default async function Detail(props:PageProps) {
+export default async function Detail(props: PageProps) {
   let db = (await connectDB).db('Forum')
-  const { id } = await props.params;
-  let result = await db.collection('post').findOne({_id : new ObjectId(id)});
+  const { id } = props.params;
+  let result = await db.collection('post').findOne({ _id: new ObjectId(id) });
 
   return (
     <div className="m-[30px]">
